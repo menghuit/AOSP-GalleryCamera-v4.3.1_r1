@@ -1,0 +1,11 @@
+apply plugin: 'java'
+
+sourceCompatibility = java_version.source_compatibility
+targetCompatibility = java_version.targetCompatibility
+
+sourceSets {
+    main {
+        java.srcDirs = ['isoparser/src/main/java']
+        resources.srcDirs = ['isoparser/src/main/resources']
+    }
+}

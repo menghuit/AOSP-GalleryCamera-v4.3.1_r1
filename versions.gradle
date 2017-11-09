@@ -1,0 +1,60 @@
+/**
+* Shared file between builds so that they can all use the same dependencies and
+* maven repositories.
+**/
+ext.deps = [:]
+def versions = [:]
+versions.support = "25.0.0"
+versions.junit = "4.12"
+versions.glide = "3.8.0"
+versions.retrofit = "2.3.0"
+versions.apache_commons = "2.5"
+versions.nineoldandroids = "2.4.0"
+versions.android_gradle_plugin = "2.3.3"
+def deps = [:]
+
+def support = [:]
+support.annotations = "com.android.support:support-annotations:$versions.support"
+support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
+support.cardview = "com.android.support:cardview-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.v4 = "com.android.support:support-v4:$versions.support"
+support.v13 = "com.android.support:support-v13:$versions.support"
+support.core_utils = "com.android.support:support-core-utils:$versions.support"
+deps.support = support
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+
+deps.nineoldandroids = "com.nineoldandroids:library:$versions.nineoldandroids"
+deps.junit = "junit:junit:$versions.junit"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 18
+build_versions.build_compile_sdk = 25
+build_versions.target_sdk = 23
+build_versions.build_tools = "25.0.2"
+ext.build_versions = build_versions
+
+def render_script = [:]
+render_script.target_Api = 18
+render_script.support_mode_enabled = true
+ext.render_script = render_script
+
+def java_version = [:]
+java_version.source_compatibility = JavaVersion.VERSION_1_7
+java_version.targetCompatibility = JavaVersion.VERSION_1_7
+ext.java_version = java_version
+
+
+def addRepos(RepositoryHandler handler) {
+    // handler.google()
+    handler.jcenter()
+    // handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+ext.addRepos = this.&addRepos

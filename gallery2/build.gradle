@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion build_versions.build_compile_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        applicationId "com.android.gallery3d"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        renderscriptTargetApi render_script.target_Api
+        renderscriptSupportModeEnabled render_script.support_mode_enabled
+    }
+
+    def rootPath = rootProject.getRootDir().getAbsolutePath()
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    useLibrary 'org.apache.http.legacy'
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src', 'src_pd']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+             jniLibs.srcDirs = ['libs']
+            manifest.srcFile 'AndroidManifest.xml'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility java_version.source_compatibility
+        targetCompatibility java_version.targetCompatibility
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':gallerycommon')
+    compile project(':xmptoolkit')
+    compile project(':mp4parser')
+    compile deps.support.v4
+    compile deps.support.v13
+}
